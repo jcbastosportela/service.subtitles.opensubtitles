@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+# modified
 import os
 import shutil
 import sys
@@ -29,6 +29,11 @@ xbmcvfs.mkdirs(__temp__)
 sys.path.append (__resource__)
 
 from OSUtilities import OSDBServer, log, hashFile, normalizeString
+from loggerinitializer import *
+
+initialize_logger('/tmp/')
+logging.debug("OS log stared")
+logging.debug(__temp__)
 
 def Search( item ):
   search_data = []
@@ -88,6 +93,8 @@ def Download(id,url,format,stack=False):
   if not result:
     log( __name__,"Download Using HTTP")
     zip = os.path.join( __temp__, "OpenSubtitles.zip")
+    logging.debug(__temp__)
+    logging.debug(zip)
     f = urllib.urlopen(url)
     with open(zip, "wb") as subFile:
       subFile.write(f.read())
